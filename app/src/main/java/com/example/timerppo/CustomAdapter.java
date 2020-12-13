@@ -59,18 +59,4 @@ public class CustomAdapter extends ArrayAdapter<TimerModel> {
 
         return convertView;
     }
-
-    private class ViewHolder {
-        Button removeButton, editButton, startButton;
-        TextView nameView, idView;
-        LinearLayout layout;
-        ViewHolder(View view){
-            removeButton = view.findViewById(R.id.removeButton);
-            editButton = view.findViewById(R.id.editButton);
-            startButton = view.findViewById(R.id.startButton);
-            nameView = view.findViewById(R.id.nameView);
-            layout = view.findViewById(R.id.layout);
-            idView = view.findViewById(R.id.idView);
-        }
-    }
 }
