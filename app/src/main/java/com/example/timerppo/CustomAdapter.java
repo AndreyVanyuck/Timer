@@ -30,7 +30,35 @@ public class CustomAdapter extends ArrayAdapter<TimerModel> {
         this.inflater = LayoutInflater.from(context);
     }
 
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder viewHolder;
+        if(convertView == null){
+            convertView = inflater.inflate(this.layout, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        TimerModel timerModel = timerModelList.get(position);
+        viewHolder.nameView.setText(timerModel.Name);
+        viewHolder.idView.setText((Integer.toString(timerModel.Id)));
+        viewHolder.layout.setBackgroundColor(timerModel.Color);
 
+        //TODO
+        viewHolder.startButton.setOnClickListener(i -> {
+        });
+
+        //TODO
+        viewHolder.removeButton.setOnClickListener(i -> {
+        });
+
+        //TODO
+        viewHolder.editButton.setOnClickListener(i -> {
+        });
+
+        return convertView;
+    }
 
     private class ViewHolder {
         Button removeButton, editButton, startButton;
