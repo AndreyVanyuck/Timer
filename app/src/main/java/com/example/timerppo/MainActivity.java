@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
         db = DatabaseHandler.getInstance().getDatabase();
 
         listView = findViewById(R.id.listTimer);
-        //TODO
-        //Set adapter
-
+        CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item, db.timerDao().getAll(), db);
+        listView.setAdapter(adapter);
     }
 }
