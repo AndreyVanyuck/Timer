@@ -68,7 +68,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         buttonSetPlus =  (Button) findViewById(R.id.plus_set);
         buttonSetMinus =  (Button) findViewById(R.id.minus_set);
 
-        //inputName = findViewById(R.id.)
+        inputName = (EditText) findViewById(R.id.inputName)
         inputCalm = (EditText) findViewById(R.id.calm_value);
         inputCycle = (EditText) findViewById(R.id.calm_value);
         inputSet = (EditText) findViewById(R.id.calm_value);

@@ -6,6 +6,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".CreateWorkoutActivity">
+    <TextView
+        android:id="@+id/textViewTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/trainig"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textAlignment="center"
+        android:textColor="@color/primary" />
+
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textColor="@color/primary"
+        android:textColorHighlight="@color/white"
+        android:textColorHint="@color/primary"
+        android:textColorLink="@color/white"
+        android:textCursorDrawable="@color/white" />
 
     <TableRow
         xmlns:android="http://schemas.android.com/apk/res/android"
