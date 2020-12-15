@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TimerPPO</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="prepair">Подготовка</string>
+    <string name="work">Работа</string>
+    <string name="rest">Отдых</string>
+    <string name="cycle">Циклы</string>
+    <string name="set">Сеты</string>
+    <string name="calm">Успокоиться</string>
+    <string name="Reset">отмена</string>
+    <string name="Save">сохранить</string>
 </resources>
