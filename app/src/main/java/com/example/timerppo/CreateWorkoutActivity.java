@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -217,6 +218,8 @@ public class CreateWorkoutActivity extends AppCompatActivity {
                         Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()})
                 );
                 db.timerDao().insert(workoutModel);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
