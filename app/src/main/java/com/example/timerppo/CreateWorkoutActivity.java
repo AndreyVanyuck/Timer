@@ -4,11 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar;
+import codes.side.andcolorpicker.model.IntegerHSLColor;
+
+import com.example.timerppo.DB.DatabaseHandler;
+import com.example.timerppo.DB.DatabaseHelper;
+import com.example.timerppo.Models.WorkoutModel;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
     Button buttonPrepairPlus;
@@ -32,12 +40,17 @@ public class CreateWorkoutActivity extends AppCompatActivity {
     EditText inputSet;
     EditText inputCalm;
 
+    HSLColorPickerSeekBar colorBar;
+
     CreateViewModel createViewModel;
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_timer);
+
+        db = DatabaseHandler.getInstance().getDatabase();
 
         createViewModel = new ViewModelProvider(this).get(CreateViewModel.class);
 
@@ -61,6 +74,8 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         inputWork = (EditText) findViewById(R.id.calm_value);
         inputRest = (EditText) findViewById(R.id.calm_value);
         inputPrepair = (EditText) findViewById(R.id.calm_value);
+
+        colorBar = (HSLColorPickerSeekBar)findViewById(R.id.color_seek_bar);
 
 
         final Observer<String> inputNameObserver = new Observer<String>() {
@@ -182,6 +197,26 @@ public class CreateWorkoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createViewModel.setSets(createViewModel.getSets().getValue() - 1);
+            }
+        });
+
+
+        findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntegerHSLColor color = colorBar.getPickedColor();
+
+                WorkoutModel workoutModel = new WorkoutModel(
+                        inputName.getText().toString(),
+                        Integer.parseInt(inputPrepair.getText().toString()),
+                        Integer.parseInt(inputWork.getText().toString()),
+                        Integer.parseInt(inputRest.getText().toString()),
+                        Integer.parseInt(inputCycle.getText().toString()),
+                        Integer.parseInt(inputSet.getText().toString()),
+                        Integer.parseInt(inputCalm.getText().toString()),
+                        Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()})
+                );
+                db.timerDao().insert(workoutModel);
             }
         });
     }
