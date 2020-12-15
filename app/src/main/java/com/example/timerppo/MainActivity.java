@@ -2,6 +2,7 @@ package com.example.timerppo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -23,5 +24,10 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listTimer);
         CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item, db.timerDao().getAll(), db);
         listView.setAdapter(adapter);
+
+        findViewById(R.id.buttonAddTimer).setOnClickListener(i -> {
+            //Intent intent = new Intent(getApplicationContext(), CreateTimer.class);
+           // startActivity(intent);
+        });
     }
 }
