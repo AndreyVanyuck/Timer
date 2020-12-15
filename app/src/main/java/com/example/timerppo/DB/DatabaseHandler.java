@@ -15,7 +15,7 @@ public class DatabaseHandler extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, DatabaseHelper.class, "WorkoutDatabase")
+        database = Room.databaseBuilder(this, DatabaseHelper.class, "TimerDatabase")
                 .allowMainThreadQueries()
                 .build();
     }
