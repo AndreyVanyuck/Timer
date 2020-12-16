@@ -10,4 +10,8 @@
     <string name="calm">Успокоиться</string>
     <string name="Reset">отмена</string>
     <string name="Save">сохранить</string>
+    <string name="trainig">Тренировка</string>
+    <string name="step">Этап</string>
+    <string name="Time">Время</string>
+    <string name="Finish">Окончание тренировки</string>
 </resources>

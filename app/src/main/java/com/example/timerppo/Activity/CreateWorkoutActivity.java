@@ -1,4 +1,4 @@
-package com.example.timerppo;
+package com.example.timerppo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -7,17 +7,20 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import codes.side.andcolorpicker.hsl.HSLColorPickerSeekBar;
 import codes.side.andcolorpicker.model.IntegerHSLColor;
 
+import com.example.timerppo.Activity.MainActivity;
 import com.example.timerppo.DB.DatabaseHandler;
 import com.example.timerppo.DB.DatabaseHelper;
 import com.example.timerppo.Models.WorkoutModel;
+import com.example.timerppo.R;
+import com.example.timerppo.ViewModel.CreateViewModel;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
     Button buttonPrepairPlus;
@@ -198,6 +201,16 @@ public class CreateWorkoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createViewModel.setSets(createViewModel.getSets().getValue() - 1);
+            }
+        });
+
+        inputName.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    createViewModel.setName(inputName.getText().toString());
+                    return true;
+                }
+                return false;
             }
         });
 

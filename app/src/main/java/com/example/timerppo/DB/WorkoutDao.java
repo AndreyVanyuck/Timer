@@ -13,6 +13,9 @@ public interface WorkoutDao {
     @Query("SELECT * FROM workoutmodel")
     List<WorkoutModel> getAll();
 
+    @Query("SELECT * FROM workoutmodel WHERE id = :id")
+    WorkoutModel getById(long id);
+
     @Insert
     void insert(WorkoutModel workoutModel);
 }

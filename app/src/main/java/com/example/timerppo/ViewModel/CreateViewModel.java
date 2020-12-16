@@ -1,4 +1,4 @@
-package com.example.timerppo;
+package com.example.timerppo.ViewModel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -22,7 +22,7 @@ public class CreateViewModel extends ViewModel {
         restSets = new MutableLiveData<>(10);
         cycles = new MutableLiveData<>(8);
         sets = new MutableLiveData<>(4);
-        color = new MutableLiveData<>(-16777216);
+        color = new MutableLiveData<>();
     }
 
     public MutableLiveData<Integer> getPreparation() {

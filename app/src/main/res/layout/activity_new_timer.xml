@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".CreateWorkoutActivity">
+    tools:context=".Activity.CreateWorkoutActivity">
     <TextView
         android:id="@+id/textViewTimer"
         android:layout_width="match_parent"

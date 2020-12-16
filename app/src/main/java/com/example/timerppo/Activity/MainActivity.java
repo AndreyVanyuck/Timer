@@ -1,14 +1,18 @@
-package com.example.timerppo;
+package com.example.timerppo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.timerppo.Adapter.CustomAdapter;
 import com.example.timerppo.DB.DatabaseHandler;
 import com.example.timerppo.DB.DatabaseHelper;
+import com.example.timerppo.Models.WorkoutModel;
+import com.example.timerppo.R;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
@@ -25,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listTimer);
         CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item, db.timerDao().getAll(), db);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                WorkoutModel workoutModel = (WorkoutModel) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
+                intent.putExtra("id", workoutModel.getId());
+                startActivity(intent);
+            }
+        });
 
         findViewById(R.id.buttonAddTimer).setOnClickListener(new View.OnClickListener() {
             @Override

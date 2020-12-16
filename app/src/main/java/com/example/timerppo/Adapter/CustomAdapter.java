@@ -1,4 +1,4 @@
-package com.example.timerppo;
+package com.example.timerppo.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,8 +19,8 @@ public class CustomAdapter extends BaseAdapter {
     private DatabaseHelper db;
     private Context context;
 
-    CustomAdapter(Context context, int resource, List<WorkoutModel> workoutModels,
-                  DatabaseHelper db) {
+    public CustomAdapter(Context context, int resource, List<WorkoutModel> workoutModels,
+                         DatabaseHelper db) {
         this.context = context;
         this.workoutModelList = workoutModels;
         this.layout = resource;
