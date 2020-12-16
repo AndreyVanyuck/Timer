@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TimerPPO">
-        <activity android:name=".Activity.TrainingActivity"></activity>
-        <activity android:name=".NewTimerActivity" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.CreateWorkoutActivity" />
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.SettingsActivity" />
+        <activity android:name=".Activity.WorkoutActivity" />
+        <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,12 +1,15 @@
 package com.example.timerppo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
+import com.example.timerppo.Activity.CreateWorkoutActivity;
+import com.example.timerppo.Activity.WorkoutActivity;
 import com.example.timerppo.DB.DatabaseHelper;
 import com.example.timerppo.Models.WorkoutModel;
 
@@ -57,18 +60,28 @@ public class CustomAdapter extends BaseAdapter {
         viewHolder.nameView.setText(workoutModel.getName());
         viewHolder.idView.setText((Integer.toString(workoutModel.getId())));
         viewHolder.layout.setBackgroundColor(workoutModel.getColor());
-/*
-        //TODO
-        viewHolder.startButton.setOnClickListener(i -> {
-        });
-        //TODO
-        viewHolder.removeButton.setOnClickListener(i -> {
-        });
-        //TODO
-        viewHolder.editButton.setOnClickListener(i -> {
-        });
-*/
 
+        viewHolder.startButton.setOnClickListener(i -> {
+            Context context = getContext();
+            Intent intent = new Intent(context, CreateWorkoutActivity.class);
+            intent.putExtra("timerId", workoutModel.getId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
+
+        viewHolder.removeButton.setOnClickListener(i -> {
+            db.timerDao().delete(workoutModelList.get(position));
+            workoutModelList.remove(workoutModel);
+            notifyDataSetChanged();
+        });
+
+        viewHolder.editButton.setOnClickListener(i -> {
+            Context context = getContext();
+            Intent intent = new Intent(context, CreateWorkoutActivity.class);
+            intent.putExtra("timerId", new int[]{workoutModel.getId(), 1});
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        });
         return convertView;
     }
 }

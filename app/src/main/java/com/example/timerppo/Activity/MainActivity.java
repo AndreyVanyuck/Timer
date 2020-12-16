@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WorkoutModel workoutModel = (WorkoutModel) parent.getItemAtPosition(position);
-                Intent intent = new Intent(getApplicationContext(), TrainingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WorkoutActivity.class);
                 intent.putExtra("id", workoutModel.getId());
                 startActivity(intent);
             }
@@ -47,5 +47,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        findViewById(R.id.settingsButton).setOnClickListener(i -> {
+            Intent Settings = new Intent(this, SettingsActivity.class);
+            startActivityForResult(Settings, 1);
+        });
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data)
+        {
+            super.onActivityResult(requestCode, resultCode, data);
+            recreate();
+        }
     }
 }

@@ -218,22 +218,42 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntegerHSLColor color = colorBar.getPickedColor();
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+                int[] id = (int[])bundle.get("timerId");
 
-                WorkoutModel workoutModel = new WorkoutModel(
-                        inputName.getText().toString(),
-                        Integer.parseInt(inputPrepair.getText().toString()),
-                        Integer.parseInt(inputWork.getText().toString()),
-                        Integer.parseInt(inputRest.getText().toString()),
-                        Integer.parseInt(inputCycle.getText().toString()),
-                        Integer.parseInt(inputSet.getText().toString()),
-                        Integer.parseInt(inputCalm.getText().toString()),
-                        Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()})
-                );
-                db.timerDao().insert(workoutModel);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                if (id[1] != 1) {
+                    IntegerHSLColor color = colorBar.getPickedColor();
+                    WorkoutModel workoutModel = new WorkoutModel(
+                            inputName.getText().toString(),
+                            Integer.parseInt(inputPrepair.getText().toString()),
+                            Integer.parseInt(inputWork.getText().toString()),
+                            Integer.parseInt(inputRest.getText().toString()),
+                            Integer.parseInt(inputCycle.getText().toString()),
+                            Integer.parseInt(inputSet.getText().toString()),
+                            Integer.parseInt(inputCalm.getText().toString()),
+                            Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()})
+                    );
+                    db.timerDao().insert(workoutModel);
+                }
+                else{
+                    WorkoutModel workoutModel = db.timerDao().getById(id[0]);
+                    IntegerHSLColor color = colorBar.getPickedColor();
+                    workoutModel.setName(inputName.getText().toString());
+                    workoutModel.setPreparation(Integer.parseInt(inputPrepair.getText().toString()));
+                    workoutModel.setWorkTime(Integer.parseInt(inputWork.getText().toString()));
+                    workoutModel.setRestTime(Integer.parseInt(inputRest.getText().toString()));
+                    workoutModel.setCycles(Integer.parseInt(inputCycle.getText().toString()));
+                    workoutModel.setSets(Integer.parseInt(inputSet.getText().toString()));
+                    workoutModel.setRestSets(Integer.parseInt(inputCalm.getText().toString()));
+                    workoutModel.setColor(Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()}));
+
+                    db.timerDao().update(workoutModel);
+                }
+                    Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(backIntent);
             }
         });
+
     }
 }

@@ -206,12 +206,12 @@ public class WorkoutActivity extends AppCompatActivity {
     class WorkAdapter extends ArrayAdapter<String> {
         private LayoutInflater inflater;
         private int layout;
-        private ArrayList<String> stages;
+        private ArrayList<String> actions;
         String size;
 
-        public WorkAdapter(Context context, int resource, ArrayList<String> stages, String size) {
-            super(context, resource, stages);
-            this.stages = stages;
+        public WorkAdapter(Context context, int resource, ArrayList<String> actions, String size) {
+            super(context, resource, actions);
+            this.actions = actions;
             this.layout = resource;
             this.inflater = LayoutInflater.from(context);
             this.size = size;
@@ -226,7 +226,7 @@ public class WorkoutActivity extends AppCompatActivity {
             } else {
                 viewHolder = (WorkAdapter.ViewHolder) convertView.getTag();
             }
-            viewHolder.textNamePart.setText(stages.get(position));
+            viewHolder.textNamePart.setText(actions.get(position));
             viewHolder.textNamePart.setTextSize(Float.parseFloat(size));
             if (allParts.isItemChecked(position)) {
                 viewHolder.layout.setBackgroundColor(getResources().getColor(R.color.colorYellow));
