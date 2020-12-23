@@ -1,7 +1,13 @@
 package com.example.timerppo.ViewModel;
 
+import android.graphics.Color;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.timerppo.DB.DatabaseHandler;
+import com.example.timerppo.DB.DatabaseHelper;
+import com.example.timerppo.Models.WorkoutModel;
 
 
 public class CreateViewModel extends ViewModel {
@@ -13,6 +19,8 @@ public class CreateViewModel extends ViewModel {
     private MutableLiveData<Integer> cycles;
     private MutableLiveData<Integer> sets;
     private MutableLiveData<Integer> color;
+    private DatabaseHelper db;
+
 
     public CreateViewModel(){
         name = new MutableLiveData<>("");
@@ -23,6 +31,7 @@ public class CreateViewModel extends ViewModel {
         cycles = new MutableLiveData<>(8);
         sets = new MutableLiveData<>(4);
         color = new MutableLiveData<>();
+        db = DatabaseHandler.getInstance().getDatabase();
     }
 
     public MutableLiveData<Integer> getPreparation() {
@@ -79,6 +88,35 @@ public class CreateViewModel extends ViewModel {
 
     public void setName(String name) {
         this.name.setValue(name);
+    }
+
+    public void insertItem(){
+        WorkoutModel workoutModel = new WorkoutModel(
+                name.getValue(),
+                preparation.getValue(),
+                workTime.getValue(),
+                restTime.getValue(),
+                cycles.getValue(),
+                sets.getValue(),
+                restSets.getValue(),
+                color.getValue()
+        );
+        db.timerDao().insert(workoutModel);
+    }
+
+    public void updateItem(int id){
+        WorkoutModel workoutModel = db.timerDao().getById(id);
+
+        workoutModel.setName(name.getValue());
+        workoutModel.setPreparation(preparation.getValue());
+        workoutModel.setWorkTime(workTime.getValue());
+        workoutModel.setRestTime(restTime.getValue());
+        workoutModel.setCycles(cycles.getValue());
+        workoutModel.setSets(sets.getValue());
+        workoutModel.setRestSets(restSets.getValue());
+        workoutModel.setColor(color.getValue());
+
+        db.timerDao().update(workoutModel);
     }
 }
 

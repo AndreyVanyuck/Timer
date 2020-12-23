@@ -47,14 +47,11 @@ public class CreateWorkoutActivity extends AppCompatActivity {
     HSLColorPickerSeekBar colorBar;
 
     CreateViewModel createViewModel;
-    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_timer);
-
-        db = DatabaseHandler.getInstance().getDatabase();
 
         createViewModel = new ViewModelProvider(this).get(CreateViewModel.class);
 
@@ -223,32 +220,10 @@ public class CreateWorkoutActivity extends AppCompatActivity {
                 int[] id = (int[])bundle.get("timerId");
 
                 if (id[1] != 1) {
-                    IntegerHSLColor color = colorBar.getPickedColor();
-                    WorkoutModel workoutModel = new WorkoutModel(
-                            inputName.getText().toString(),
-                            Integer.parseInt(inputPrepair.getText().toString()),
-                            Integer.parseInt(inputWork.getText().toString()),
-                            Integer.parseInt(inputRest.getText().toString()),
-                            Integer.parseInt(inputCycle.getText().toString()),
-                            Integer.parseInt(inputSet.getText().toString()),
-                            Integer.parseInt(inputCalm.getText().toString()),
-                            Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()})
-                    );
-                    db.timerDao().insert(workoutModel);
+                    createViewModel.insertItem();
                 }
                 else{
-                    WorkoutModel workoutModel = db.timerDao().getById(id[0]);
-                    IntegerHSLColor color = colorBar.getPickedColor();
-                    workoutModel.setName(inputName.getText().toString());
-                    workoutModel.setPreparation(Integer.parseInt(inputPrepair.getText().toString()));
-                    workoutModel.setWorkTime(Integer.parseInt(inputWork.getText().toString()));
-                    workoutModel.setRestTime(Integer.parseInt(inputRest.getText().toString()));
-                    workoutModel.setCycles(Integer.parseInt(inputCycle.getText().toString()));
-                    workoutModel.setSets(Integer.parseInt(inputSet.getText().toString()));
-                    workoutModel.setRestSets(Integer.parseInt(inputCalm.getText().toString()));
-                    workoutModel.setColor(Color.HSVToColor(new float[]{color.getFloatH(), color.getFloatL(), color.getFloatS()}));
-
-                    db.timerDao().update(workoutModel);
+                    createViewModel.updateItem(id[0]);
                 }
                     Intent backIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(backIntent);
