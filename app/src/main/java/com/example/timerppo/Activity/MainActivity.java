@@ -1,8 +1,12 @@
 package com.example.timerppo.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,8 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         db = DatabaseHandler.getInstance().getDatabase();
 
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle extras = intent.getExtras();
+                assert extras != null;
+                int position = extras.getInt("position");
+                db.timerDao().delete(db.timerDao().getById(position));
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("item-deleted"));
+
         listView = findViewById(R.id.listTimer);
-        CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item, db.timerDao().getAll(), db);
+        CustomAdapter adapter = new CustomAdapter(this, R.layout.list_item, db.timerDao().getAll());
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.example.timerppo.Activity.CreateWorkoutActivity;
-import com.example.timerppo.Activity.WorkoutActivity;
-import com.example.timerppo.DB.DatabaseHelper;
 import com.example.timerppo.Models.WorkoutModel;
 
 import java.util.ArrayList;
@@ -19,15 +19,12 @@ import java.util.List;
 public class CustomAdapter extends BaseAdapter {
     private int layout;
     private List<WorkoutModel> workoutModelList = new ArrayList<WorkoutModel>();
-    private DatabaseHelper db;
     private Context context;
 
-    public CustomAdapter(Context context, int resource, List<WorkoutModel> workoutModels,
-                         DatabaseHelper db) {
+    public CustomAdapter(Context context, int resource, List<WorkoutModel> workoutModels) {
         this.context = context;
         this.workoutModelList = workoutModels;
         this.layout = resource;
-        this.db = db;
     }
 
     @Override
@@ -70,7 +67,7 @@ public class CustomAdapter extends BaseAdapter {
         });
 
         viewHolder.removeButton.setOnClickListener(i -> {
-            db.timerDao().delete(workoutModelList.get(position));
+            sendBroadcast(position);
             workoutModelList.remove(workoutModel);
             notifyDataSetChanged();
         });
@@ -83,5 +80,11 @@ public class CustomAdapter extends BaseAdapter {
             context.startActivity(intent);
         });
         return convertView;
+    }
+
+    private void sendBroadcast(int position) {
+        Intent intent = new Intent("item-deleted");
+        intent.putExtra("position", position);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 }
