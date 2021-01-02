@@ -57,7 +57,6 @@ public class CreateUpdateWorkoutViewModel extends AndroidViewModel {
         workoutModel.Cycles = Cycles.getValue();
         workoutModel.Sets = Sets.getValue();
         workoutModel.RestSets = RestSets.getValue();
-       /* workoutModel.setColor(color.getValue());*/
         db.workoutDao().update(workoutModel);
     }
 

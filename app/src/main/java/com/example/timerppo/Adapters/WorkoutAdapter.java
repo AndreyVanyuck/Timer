@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.timerppo.Activities.CreateUpdateWorkoutActivity;
+import com.example.timerppo.Activities.TimerActivity;
 import com.example.timerppo.Models.WorkoutModel;
 import com.example.timerppo.R;
 
@@ -41,8 +42,8 @@ public class WorkoutAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+        //TODO
         return 0;
-      //  return workoutModelList.get(position);//.getId();
     }
 
     @Override
@@ -61,17 +62,12 @@ public class WorkoutAdapter extends BaseAdapter {
         viewHolder.nameView.setText(workoutModel.Name);
         viewHolder.idView.setText((Integer.toString(workoutModel.Id)));
 
-//        viewHolder.layout.setBackgroundColor(workoutModel.Color);
-
-
-       /* viewHolder.startButton.setOnClickListener(i -> {
-            Context context = getContext();
-            Intent intent = new Intent(context, TrainingTimer.class);
-            intent.putExtra("timerId", timerModel.Id);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        viewHolder.startButton.setOnClickListener(i -> {
+            Intent intent = new Intent(context, TimerActivity.class);
+            intent.putExtra("id_timer", Integer.parseInt(viewHolder.idView.getText().toString()));
             context.startActivity(intent);
         });
-*/
+
         viewHolder.removeButton.setOnClickListener(i -> {
             sendBroadcast(viewHolder.idView.getText().toString());
             workoutModelList.remove(workoutModel);
@@ -79,11 +75,8 @@ public class WorkoutAdapter extends BaseAdapter {
         });
 
         viewHolder.editButton.setOnClickListener(i -> {
-           // Context context = getContext();
             Intent intent = new Intent(context, CreateUpdateWorkoutActivity.class);
             intent.putExtra("id", Integer.parseInt(viewHolder.idView.getText().toString()));
-           // intent.putExtra("timerId", new int[]{timerModel.Id, 1});
- //           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
 

@@ -17,7 +17,7 @@ public class WorkoutModel {
     public int Color;
 
     public WorkoutModel(String name, int preparation, int workTime, int restTime,
-                        int cycles, int sets, int restSets){  //, int color){
+                        int cycles, int sets, int restSets){
         this.Name = name;
         this.Preparation = preparation;
         this.WorkTime = workTime;
@@ -25,7 +25,6 @@ public class WorkoutModel {
         this.Cycles = cycles;
         this.Sets = sets;
         this.RestSets = restSets;
-//        this.olor = color;
     }
     public WorkoutModel(){
         Name = "name";
