@@ -2,8 +2,8 @@
     <string name="app_name">Timer</string>
     <string name="add_string">+</string>
     <string name="Work">Работа</string>
-    <string name="Prepair">Подготовка</string>
-    <string name="Calm">Отдых</string>
+    <string name="Preparation">Подготовка</string>
+    <string name="Rest">Отдых</string>
     <string name="Start">Старт</string>
     <string name="Pause">Пауза</string>
     <string name="Final">Финиш</string>
@@ -11,7 +11,7 @@
     <string name="Cycle">Циклы</string>
     <string name="Set">Сеты</string>
     <string name="Sleep">Успокоиться</string>
-    <string name="RestBTW">Отдых между подходами</string>
+    <string name="RestSets">Отдых между подходами</string>
     <string name="Exit">Вы хотите выйти из тренировки?</string>
     <string name="Cansel">Вы хотите прекратить создание таймера?</string>
     <string name="SaveMess">Вы хотите прекратить редактирование таймера и сохранить его?</string>
@@ -36,6 +36,9 @@
     <string name="Finish">Тренировка завершена</string>
     <string name="Time">ВРЕМЯ</string>
     <string name="step">ЭТАП</string>
+    <string name="Theme">Dark</string>
+    <string name="Font">font</string>
+    <string name="ClearData">Clear all data</string>
     <string-array name="text_lang">
         <item>Русский</item>
         <item>Английский</item>

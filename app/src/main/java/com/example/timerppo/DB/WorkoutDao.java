@@ -18,6 +18,9 @@ public interface WorkoutDao {
     @Query("SELECT * FROM WorkoutModel WHERE id = :id")
     WorkoutModel getById(long id);
 
+    @Query("DELETE FROM workoutmodel")
+    void deleteAll();
+
     @Insert
     void insert(WorkoutModel workoutModel);
 
@@ -27,33 +30,3 @@ public interface WorkoutDao {
     @Update
     void update(WorkoutModel workoutModel);
 }
-
-
-
-
-/*
-@Dao
-public interface TimerDao {
-    @Query("SELECT * FROM timerModel")
-    List<TimerModel> getAll();
-
-    @Query("SELECT * FROM timerModel WHERE id = :id")
-    TimerModel getById(long id);
-
-    @Query("SELECT * FROM timerModel WHERE name = :name")
-    TimerModel getByName(String name);
-
-    @Insert
-    void insert(TimerModel timerModel);
-
-    @Update
-    void update(TimerModel timerModel);
-
-    @Delete
-    void delete(TimerModel timerModel);
-
-    @Query("DELETE FROM timerModel")
-    void DeleteAll();
-}
-
-*/
